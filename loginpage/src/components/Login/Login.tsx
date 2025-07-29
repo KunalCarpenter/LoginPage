@@ -4,20 +4,18 @@ import * as Yup from 'yup';
 import styles from './Login.module.scss';
 import backgroundImg from '../../assets/login-background.png';
 
-const LoginSchema = Yup.object().shape({
+const LoginSchema = Yup.object({
   email: Yup.string()
-    .email('Invalid email format')
-    .matches(/\.[a-zA-Z]{2,}$/, 'Must end with .com, .in, etc.')
+    .email('Invalid email')
     .required('Required'),
   password: Yup.string()
-    .min(8, 'Password must be at least 8 characters')
+    .min(8, 'Too short')
     .required('Required'),
 });
 
 const Login: React.FC = () => {
   return (
     <div className={styles.wrapper}>
-      
       <div className={styles.leftPanel}>
         <h2 className={styles.title}>Welcome back !</h2>
         <p className={styles.subtitle}>
@@ -26,42 +24,38 @@ const Login: React.FC = () => {
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={LoginSchema}
-          onSubmit={(values) => {
-            console.log(values);
-          }}
+          onSubmit={() => {}}
         >
-          {() => (
-            <Form className={styles.form}>
-              <div className={styles.formGroup}>
+          <Form className={styles.form}>
+            <div className={styles.formGroup}>
                 <label htmlFor="email">Email<span>*</span></label>
                 <Field name="email" type="email" placeholder="Enter your email" className={styles.input} />
-                <ErrorMessage name="email" component="div" className={styles.error} />
-              </div>
+              <ErrorMessage name="email" component="div" className={styles.error} />
+            </div>
 
-              <div className={styles.formGroup}>
+            <div className={styles.formGroup}>
                 <label htmlFor="password">Password<span>*</span></label>
                 <Field name="password" type="password" placeholder="Enter your password" className={styles.input} />
-                <ErrorMessage name="password" component="div" className={styles.error} />
-              </div>
+              <ErrorMessage name="password" component="div" className={styles.error} />
+            </div>
 
-              <div className={styles.row}>
-                <label className={styles.checkboxLabel}>
+            <div className={styles.row}>
+              <label className={styles.checkboxLabel}>
                   <Field type="checkbox" name="remember" /> Remember me
-                </label>
+              </label>
                 <a href="/" className={styles.link}>Forgot your password ?</a>
-              </div>
+            </div>
 
               <button type="submit" className={styles.button}>Log In</button>
 
-              <div className={styles.footerText}>
+            <div className={styles.footerText}>
                 Don't have an account? <a href="#">Register here</a>
-              </div>
-            </Form>
-          )}
+            </div>
+          </Form>
         </Formik>
       </div>
       <div className={styles.rightPanel}>
-        <img src={backgroundImg} alt="Login Visual" className={styles.image} />
+        <img src={backgroundImg} className={styles.image} />
       </div>
     </div>
   );
