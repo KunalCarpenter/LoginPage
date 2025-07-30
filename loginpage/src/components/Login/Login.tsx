@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styles from './Login.module.scss';
 import backgroundImg from '../../assets/login-background.png';
+import { Link } from 'react-router-dom';
 
 const LoginSchema = Yup.object({
   email: Yup.string()
@@ -47,9 +48,15 @@ const Login: React.FC = () => {
             </div>
 
               <button type="submit" className={styles.button}>Log In</button>
-
+              <p className={styles.orText}>or</p>
+              <div className={styles.googleWrapper}>
+                <button type="button" className={styles.googleBtn}>
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google icon" />
+                    <span>Login with Google</span>
+                </button>
+              </div>
             <div className={styles.footerText}>
-                Don't have an account? <a href="#">Register here</a>
+                Don't have an account? <Link to="/register">Register here</Link>
             </div>
           </Form>
         </Formik>
