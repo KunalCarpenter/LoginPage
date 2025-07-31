@@ -30,35 +30,36 @@ const Register: React.FC = () => {
           validationSchema={RegisterSchema}
           onSubmit={() => {}}
         >
-          <Form className={styles.form}>
+          {({ errors, touched }) => (
+            <Form className={styles.form}>
             <div className={styles.row}>
               <div className={styles.formGroup}>
                 <label htmlFor='firstname'>First Name<span>*</span></label>
-                <Field name="firstname" type="text" placeholder="Enter your first name" className={styles.input} />
+                <Field name="firstname" type="text" placeholder="Enter your first name" className={errors.firstname ? `${styles.input} ${styles.errorInput}` : styles.input} />
                 <ErrorMessage name="firstname" component="div" className={styles.error} />
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor='lastname'>Last Name<span>*</span></label>
-                <Field name="lastname" type="text" placeholder="Enter your last name" className={styles.input} />
+                <Field name="lastname" type="text" placeholder="Enter your last name" className={errors.lastname ? `${styles.input} ${styles.errorInput}` : styles.input} />
                 <ErrorMessage name="lastname" component="div" className={styles.error} />
               </div>
             </div>
 
             <div className={styles.formGroup}>
               <label htmlFor='email'>Email<span>*</span></label>
-              <Field name="email" type="email" placeholder="Enter your email" className={styles.input} />
+              <Field name="email" type="email" placeholder="Enter your email" className={errors.email ? `${styles.input} ${styles.errorInput}` : styles.input} />
               <ErrorMessage name="email" component="div" className={styles.error} />
             </div>
 
             <div className={styles.formGroup}>
               <label htmlFor='password'>Password<span>*</span></label>
-              <Field name="password" type="password" placeholder="Enter your password" className={styles.input} />
+              <Field name="password" type="password" placeholder="Enter your password" className={errors.password ? `${styles.input} ${styles.errorInput}` : styles.input} />
               <ErrorMessage name="password" component="div" className={styles.error} />
             </div>
 
             <div className={styles.formGroup}>
               <label htmlFor='confirmPassword'>Confirm Password<span>*</span></label>
-              <Field name="confirmPassword" type="password" placeholder="Confirm your password" className={styles.input} />
+              <Field name="confirmPassword" type="password" placeholder="Confirm your password" className={errors.confirmPassword ? `${styles.input} ${styles.errorInput}` : styles.input} />
               <ErrorMessage name="confirmPassword" component="div" className={styles.error} />
             </div>
 
@@ -77,7 +78,7 @@ const Register: React.FC = () => {
             <div className={styles.footerText}>
               Already have an account? <Link to="/">Log in here</Link>
             </div>
-          </Form>
+          </Form>)}
         </Formik>
       </div>
 

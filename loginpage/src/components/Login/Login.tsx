@@ -27,16 +27,17 @@ const Login: React.FC = () => {
           validationSchema={LoginSchema}
           onSubmit={() => {}}
         >
-          <Form className={styles.form}>
+          {({ errors, touched }) => (
+            <Form className={styles.form}>
             <div className={styles.formGroup}>
                 <label htmlFor="email">Email<span>*</span></label>
-                <Field name="email" type="email" placeholder="Enter your email" className={styles.input} />
+                <Field name="email" type="email" placeholder="Enter your email" className={errors.email ? `${styles.input} ${styles.errorInput}` : styles.input} />
               <ErrorMessage name="email" component="div" className={styles.error} />
             </div>
 
             <div className={styles.formGroup}>
                 <label htmlFor="password">Password<span>*</span></label>
-                <Field name="password" type="password" placeholder="Enter your password" className={styles.input} />
+                <Field name="password" type="password" placeholder="Enter your password" className={errors.password ? `${styles.input} ${styles.errorInput}` : styles.input} />
               <ErrorMessage name="password" component="div" className={styles.error} />
             </div>
 
@@ -59,6 +60,8 @@ const Login: React.FC = () => {
                 Don't have an account? <Link to="/register">Register here</Link>
             </div>
           </Form>
+          )}
+          
         </Formik>
       </div>
       <div className={styles.rightPanel}>

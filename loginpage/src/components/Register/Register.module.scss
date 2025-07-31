@@ -75,6 +75,9 @@
   border-radius: 6px;
   //width: 30vw;
   //font-size: 0.95rem;
+  &.errorInput {
+    border-color: var(--danger);
+  }
 }
 
 .error {

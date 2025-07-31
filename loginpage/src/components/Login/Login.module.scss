@@ -55,10 +55,14 @@
   align-items: center;
   width: 30vw;
 }
-
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .formGroup label {
   font-weight: 500;
-  margin-bottom: 2px;
+  margin-bottom: 0.25rem;
   width: 30vw;
   
 }
@@ -69,6 +73,10 @@
   border: 1px solid var(--border);
   border-radius: 6px;
   width: 30vw;
+  &.errorInput {
+    border-color: var(--danger);
+  }
+
 }
 
 .error {
