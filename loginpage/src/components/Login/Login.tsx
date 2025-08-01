@@ -4,8 +4,9 @@ import * as Yup from 'yup';
 import styles from './Login.module.scss';
 import backgroundImg from '../../assets/login-background.png';
 import { Link } from 'react-router-dom';
+import GoogleAuth from '../GoogleAuth/GoogleAuth';
 //import { useNavigate } from 'react-router-dom';
-import { useGoogleLogin } from '@react-oauth/google';
+//import { useGoogleLogin } from '@react-oauth/google';
 //import {GoogleLogin} from '@react-oauth/google';
 //import {jwtDecode} from 'jwt-decode';
 
@@ -19,24 +20,24 @@ const LoginSchema = Yup.object({
 });
 
 const Login: React.FC = () => {
-  const googleAuth = useGoogleLogin({
-    onSuccess: handleGoogleAuthSuccess
+  // const googleAuth = useGoogleLogin({
+  //   onSuccess: handleGoogleAuthSuccess
     
-  });
-  async function handleGoogleAuthSuccess(response: any) {
+  // });
+  // async function handleGoogleAuthSuccess(response: any) {
     
-    const { access_token } = response;
-    console.log("Access Token:", access_token); 
-    const res = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
+  //   const { access_token } = response;
+  //   console.log("Access Token:", access_token); 
+  //   const res = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+  //     headers: {
+  //       Authorization: `Bearer ${access_token}`,
+  //     },
+  //   });
 
-    const data = await res.json();
-    console.log("Email:", data.email);
-    console.log("First Name:", data.given_name);
-    console.log("Last Name:", data.family_name);
+  //   const data = await res.json();
+  //   console.log("Email:", data.email);
+  //   console.log("First Name:", data.given_name);
+  //   console.log("Last Name:", data.family_name);
     
     // const googleUserInfoResponse = await googleAuthUserInfoService(access_token);
     
@@ -53,7 +54,7 @@ const Login: React.FC = () => {
         
         // userSigninMutation.mutate(params);
         
-      }
+      //}
       
       //const navigate = useNavigate();
       //const handleGoogleLogin = useGoogleLogin({
@@ -96,19 +97,8 @@ const Login: React.FC = () => {
 
               <button type="submit" className={styles.button}>Log In</button>
               <p className={styles.orText}>or</p>
-              <div className={styles.googleWrapper}>
-                {/* <GoogleLogin 
-                  onSuccess={(credentialResponse) => {
-                      console.log(credentialResponse);
-                      console.log(jwtDecode(credentialResponse.credential || ""));
-                      //navigate('/dashboard');
-                    }}
-                  onError={() => {console.log("Login Failed")}}/> */}
-                <button type="button" className={styles.googleBtn} onClick={() => googleAuth()}>
-                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google icon" />
-                    <span>Login with Google</span>
-                </button>
-              </div>
+
+              <GoogleAuth buttonlabel="Login with Google" onSuccess={(response) => console.log('Successful', response)}/>
             <div className={styles.footerText}>
                 Don't have an account? <Link to="/register">Register here</Link>
             </div>

@@ -57,7 +57,7 @@
   gap: 1rem;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 768px) {
+  @media (max-width: 775px) {
     flex-direction: column;
   }
 }
@@ -121,32 +121,7 @@
     }
   }
 }
-.googleWrapper {
-  display: flex;
-  justify-content: center;
-  
-}
 
-.googleBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1rem;
-  border: 1px solid #ccc;
-  background-color: white;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  width: 30vw;
-  img {
-    height: 20px;
-  }
-
-  &:hover {
-    background-color: #f7f7f7;
-  }
-}
 .formGroup label {
   font-weight: 500;
   margin-bottom: 0.25rem;

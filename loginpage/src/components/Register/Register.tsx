@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import styles from './Register.module.scss';
 import { Link } from 'react-router-dom';
 import backgroundImg from '../../assets/login-background.png';
+import GoogleAuth from '../GoogleAuth/GoogleAuth';
 
 const RegisterSchema = Yup.object({
   firstname: Yup.string().required('Required'),
@@ -65,12 +66,7 @@ const Register: React.FC = () => {
 
             <button type='submit' className={styles.button}>Register</button>
             <p className={styles.orText}>or</p>
-            <div className={styles.googleWrapper}>
-                <button type="button" className={styles.googleBtn}>
-                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google icon" />
-                    <span>Register with Google</span>
-                </button>
-            </div>
+            <GoogleAuth buttonlabel="Register with Google" onSuccess={(response) => console.log('Successful', response)}/>
             {/* <p className={styles.footerText}>
               By registering, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
             </p> */}
