@@ -1,0 +1,103 @@
+.wrapper {
+  display: flex;
+  height: 100vh;
+  background-color: #f9f9f9;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.leftPanel {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rightPanel {
+  flex: 1;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.errorInput {
+  border-color: #ff4d4f;
+}
+
+.error {
+  color: #ff4d4f;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #218838;
+}
+
+.orText {
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+}
+
+.footerText {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
