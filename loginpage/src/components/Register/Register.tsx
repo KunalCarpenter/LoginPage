@@ -1,22 +1,22 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "./Register.module.scss";
-import { data, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import backgroundImg from "../../assets/login-background.png";
 import GoogleAuth from "../GoogleAuth/GoogleAuth";
 import { saveuser } from "../../Utilities/database";
 import toast, { Toaster } from "react-hot-toast";
-import bcrypt, { hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { registerSchema } from "./utilities";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
-  useEffect(()=>{
-        const userEmail = localStorage.getItem("userEmail");
-        if (userEmail) {
-          navigate("/dashboard");
-        }
-      },[]);
+  useEffect(() => {
+    const userEmail = localStorage.getItem("userEmail");
+    if (userEmail) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   const initialValues = {
     firstname: "",
@@ -28,29 +28,25 @@ const Register: React.FC = () => {
 
   const handleFormSubmit = async (values: any) => {
     try {
-              const salt = await bcrypt.genSalt(10);
-              const hashedData = await bcrypt.hash(values.password, salt);
-              console.log(hashedData, values.password);
+      const salt = await bcrypt.genSalt(10);
+      const hashedData = await bcrypt.hash(values.password, salt);
+      console.log(hashedData, values.password);
 
-              //const hashedPassword = await bcrypt.hash(values.password, 10);
-              await saveuser({
-                firstname: values.firstname,
-                lastname: values.lastname,
-                email: values.email,
-                //password: values.password,
-                password: hashedData,
-                authType: "MANUAL",
-                createdAt: new Date(),
-              });
-              toast.success("Registration successful!");
-              //console.log(hashedPassword);
-            } catch (error) {
-              toast.error("Registration failed!");
-            }
+      await saveuser({
+        firstname: values.firstname,
+        lastname: values.lastname,
+        email: values.email,
+        password: hashedData,
+        authType: "MANUAL",
+        createdAt: new Date(),
+      });
+      toast.success("Registration successful!");
+    } catch (error) {
+      toast.error("Registration failed!");
+    }
   };
 
   return (
-    
     <div className={styles.wrapper}>
       <div>
         <Toaster />
@@ -65,7 +61,7 @@ const Register: React.FC = () => {
           validationSchema={registerSchema}
           onSubmit={handleFormSubmit}
         >
-          {({ errors, touched }) => (
+          {({ errors }) => (
             <Form className={styles.form}>
               <div className={styles.row}>
                 <div className={styles.formGroup}>
@@ -173,25 +169,7 @@ const Register: React.FC = () => {
                 />
               </div>
 
-              <button
-                type="submit"
-                className={styles.button}
-                // onSubmit={async (values) => {
-                //   try {
-                //     await saveuser({
-                //     firstname: values.firstname,
-                //     lastname: values.lastname,
-                //     email: values.email,
-                //     password: values.password,
-                //     authType: "manual",
-                //     createdAt: new Date()
-                //     });
-                //     alert("Registration successful!");
-                //   } catch (error) {
-                //     alert(error);
-                //   }
-                // }}
-              >
+              <button type="submit" className={styles.button}>
                 Register
               </button>
               <p className={styles.orText}>or</p>
@@ -213,9 +191,11 @@ const Register: React.FC = () => {
                   }
                 }}
               />
-              {/* <p className={styles.footerText}>
-              By registering, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
-            </p> */}
+              <p className={styles.footerText}>
+                By registering, you agree to our{" "}
+                <a href="#">Terms of Service</a> and{" "}
+                <a href="#">Privacy Policy</a>.
+              </p>
 
               <div className={styles.footerText}>
                 Already have an account? <Link to="/">Log in here</Link>

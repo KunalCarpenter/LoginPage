@@ -1,9 +1,7 @@
-//@import '@/styles/variables';
-
 .wrapper {
   display: flex;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -12,7 +10,7 @@
 
 .leftPanel {
   flex: 1;
-  padding:  1rem;
+  padding: 1rem;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -44,15 +42,12 @@
 .subtitle {
   color: #666;
   margin-bottom: 2rem;
-  
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  // justify-content: center;
-  // align-items: center;
   width: 30vw;
 }
 .formGroup {
@@ -63,20 +58,15 @@
 .formGroup label {
   font-weight: 500;
   margin-bottom: 0.25rem;
-  //width: 30vw;
-  
 }
-
 
 .input {
   padding: 0.75rem;
   border: 1px solid var(--border);
   border-radius: 6px;
-  //width: 30vw;
   &.errorInput {
     border-color: var(--danger);
   }
-
 }
 
 .error {
@@ -103,12 +93,10 @@
   font-weight: 500;
   color: var(--primary);
   text-decoration: none;
-
-  
 }
 .link:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
+}
 
 .button {
   background-color: var(--primary);
@@ -116,35 +104,30 @@
   padding: 0.75rem;
   font-weight: 600;
   border: none;
-  
+
   border-radius: 6px;
   cursor: pointer;
   width: 30vw;
-  
 }
 .button:hover {
-    background-color: darken(#4a90e2, 10%);
+  background-color: darken(#4a90e2, 10%);
 }
-.orText{
+.orText {
   text-align: center;
   color: #555;
   margin: 1px;
-  
 }
 .footerText {
   font-size: 0.9rem;
   margin-top: 1.5rem;
   color: #555;
-  
 
   a {
     color: var(--primary);
     font-weight: 500;
     text-decoration: none;
-
-    
   }
   a:hover {
-      text-decoration: underline;
-    }
+    text-decoration: underline;
+  }
 }

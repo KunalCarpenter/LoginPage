@@ -1,4 +1,3 @@
-//import bcrypt from "bcryptjs";
 const DB_NAME = "EcommerceDB";
 const STORE_NAME = "users";
 const DB_VERSION = 1;
@@ -39,9 +38,7 @@ export const saveuser = async (user: User): Promise<void> => {
       if (existing.result) {
         reject("Email already exists");
       } else {
-        //const hashedPassword = bcrypt.hash(user.password, 10);
         store.put(user);
-        //store.put({password : hashedPassword});
         resolve();
       }
     };
