@@ -9,7 +9,7 @@ const GoogleAuth: React.FC<{buttonlabel : string; onSuccess: (response:any)=>voi
 
     async function handleGoogleAuthSuccess(response: any) {
         const { access_token } = response;
-        console.log("Access Token:", access_token);
+        //console.log("Access Token:", access_token);
         const res = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
             headers: {
                 Authorization: `Bearer ${access_token}`,
@@ -17,9 +17,9 @@ const GoogleAuth: React.FC<{buttonlabel : string; onSuccess: (response:any)=>voi
         });
 
         const data = await res.json();
-        console.log("Email:", data.email);
-        console.log("First Name:", data.given_name);
-        console.log("Last Name:", data.family_name);
+        //console.log("Email:", data.email);
+        //console.log("First Name:", data.given_name);
+        //console.log("Last Name:", data.family_name);
         props.onSuccess(data);
     }
 
