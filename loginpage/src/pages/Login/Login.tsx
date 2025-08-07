@@ -7,7 +7,7 @@ import { loginUser } from "../../utils/authHelpers";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ROUTES } from "../../constants/routes";
-
+import backgroundImage from "../../assets/login-background.png";
 const Login: React.FC = () => {
   const navigate = useNavigate();
 
@@ -32,11 +32,14 @@ const Login: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftPanel}>
-        <h2 className={styles.title}>Welcome Back 👋</h2>
-        <p className={styles.subtitle}>Please sign in to continue</p>
+        <h2 className={styles.title}>Welcome Back !</h2>
+        <p className={styles.subtitle}>Enter to get unlimited access to data & information.</p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
+            <label htmlFor="email">
+                  Email<span>*</span>
+                </label>
             <input
               className={`${styles.input} ${errors.email && touched.email ? styles.errorInput : ""}`}
               type="email"
@@ -50,6 +53,9 @@ const Login: React.FC = () => {
           </div>
 
           <div className={styles.formGroup}>
+            <label htmlFor="password">
+                  Password<span>*</span>
+                </label>
             <input
               className={`${styles.input} ${errors.password && touched.password ? styles.errorInput : ""}`}
               type="password"
@@ -61,13 +67,21 @@ const Login: React.FC = () => {
             />
             {errors.password && touched.password && <span className={styles.error}>{errors.password}</span>}
           </div>
-
-          <button type="submit" className={styles.button}>Login</button>
+          <div className={styles.row}>
+            <label className={styles.checkboxLabel}>
+              <input type="checkbox" className={styles.checkboxLabel} />
+              <div> Remember me </div>
+            </label>
+            <a href="/" className={styles.link}>
+                  Forgot your password ?
+            </a>
+            </div>
+          <button type="submit" className={styles.button}>Log In</button>
         </form>
 
-        <div className={styles.orText}>OR</div>
+        <div className={styles.orText}>Or</div>
 
-        <GoogleAuth buttonlabel="Continue with Google" onSuccess={handleGoogleLogin} />
+        <GoogleAuth buttonlabel="Login with Google" onSuccess={handleGoogleLogin} />
 
         <div className={styles.footerText}>
           Don't have an account? <a href={ROUTES.REGISTER}>Register</a>
@@ -75,7 +89,7 @@ const Login: React.FC = () => {
       </div>
 
       <div className={styles.rightPanel}>
-        <img src="/assets/login-background.png" alt="Login" className={styles.image} />
+        <img src={backgroundImage} alt="Login" className={styles.image} />
       </div>
     </div>
   );

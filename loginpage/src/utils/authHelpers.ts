@@ -11,7 +11,6 @@ export const loginUser = async (
   const existingUser = await getUserByEmail(email);
   //console.log(password, existingUser.password);
   if (!existingUser) return { success: false, message: "User not found." };
-
   const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
   if (!isPasswordCorrect) return { success: false, message: "Incorrect password." };
 

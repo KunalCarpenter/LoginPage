@@ -7,6 +7,7 @@ import { registerUser } from "../../utils/authHelpers";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ROUTES } from "../../constants/routes";
+import backgroundImage from "../../assets/login-background.png";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -42,45 +43,56 @@ const Register: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftPanel}>
-        <h2 className={styles.title}>Create Account</h2>
-        <p className={styles.subtitle}>Sign up to get started</p>
+        <h2 className={styles.title}>Create an account</h2>
+        <p className={styles.subtitle}>Join us get unlimited access to data & information.</p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.row}>
+
           <div className={styles.formGroup}>
+            <label htmlFor="firstname">
+                    First Name<span>*</span>
+                  </label>
             <input
               type="text"
               name="firstname"
-              placeholder="First Name"
+              placeholder="Enter your first name"
               className={`${styles.input} ${errors.firstname && touched.firstname ? styles.errorInput : ""}`}
               value={values.firstname}
               onChange={handleChange}
               onBlur={handleBlur}
-            />
+              />
             {errors.firstname && touched.firstname && (
               <span className={styles.error}>{errors.firstname}</span>
             )}
           </div>
 
           <div className={styles.formGroup}>
+            <label htmlFor="lastname">
+                    Last Name<span>*</span>
+            </label>
             <input
               type="text"
               name="lastname"
-              placeholder="Last Name"
+              placeholder="Enter your last name"
               className={`${styles.input} ${errors.lastname && touched.lastname ? styles.errorInput : ""}`}
               value={values.lastname}
               onChange={handleChange}
               onBlur={handleBlur}
-            />
+              />
             {errors.lastname && touched.lastname && (
               <span className={styles.error}>{errors.lastname}</span>
             )}
           </div>
-
+          </div>
           <div className={styles.formGroup}>
+            <label htmlFor="email">
+                  Email<span>*</span>
+            </label>
             <input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="Enter your email"
               className={`${styles.input} ${errors.email && touched.email ? styles.errorInput : ""}`}
               value={values.email}
               onChange={handleChange}
@@ -92,10 +104,13 @@ const Register: React.FC = () => {
           </div>
 
           <div className={styles.formGroup}>
+            <label htmlFor="password">
+                  Password<span>*</span>
+            </label>
             <input
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="Enter your password"
               className={`${styles.input} ${errors.password && touched.password ? styles.errorInput : ""}`}
               value={values.password}
               onChange={handleChange}
@@ -107,10 +122,13 @@ const Register: React.FC = () => {
           </div>
 
           <div className={styles.formGroup}>
+            <label htmlFor="confirmPassword">
+                  Confirm Password<span>*</span>
+            </label>
             <input
               type="password"
               name="confirmPassword"
-              placeholder="Confirm Password"
+              placeholder="Confirm your password"
               className={`${styles.input} ${errors.confirmPassword && touched.confirmPassword ? styles.errorInput : ""}`}
               value={values.confirmPassword}
               onChange={handleChange}
@@ -124,9 +142,9 @@ const Register: React.FC = () => {
           <button type="submit" className={styles.button}>Register</button>
         </form>
 
-        <div className={styles.orText}>OR</div>
+        <div className={styles.orText}>Or</div>
 
-        <GoogleAuth buttonlabel="Continue with Google" onSuccess={handleGoogleRegister} />
+        <GoogleAuth buttonlabel="Register with Google" onSuccess={handleGoogleRegister} />
 
         <div className={styles.footerText}>
           Already have an account? <a href={ROUTES.LOGIN}>Login</a>
@@ -134,7 +152,7 @@ const Register: React.FC = () => {
       </div>
 
       <div className={styles.rightPanel}>
-        <img src="/assets/login-background.png" alt="Register" className={styles.image} />
+        <img src={backgroundImage} alt="Register" className={styles.image} />
       </div>
     </div>
   );

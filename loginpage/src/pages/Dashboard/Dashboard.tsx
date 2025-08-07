@@ -2,6 +2,7 @@ import React from "react";
 import { getUser, clearUser } from "../../utils/storage";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
+import styles from "./Dashboard.module.scss";
 
 const Dashboard: React.FC = () => {
   const user = getUser();
@@ -13,24 +14,13 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: "40px", fontFamily: "Segoe UI" }}>
-      <h1 style={{ marginBottom: "10px" }}>
+    <div className={styles.wrapper}>
+      <h1 className={styles.header}>
         Welcome, {user?.firstname} {user?.lastname}
       </h1>
       <p>Email: {user?.email}</p>
       <p>Type: {user?.type}</p>
-      <button
-        onClick={handleLogout}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#dc3545",
-          color: "white",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
-      >
+      <button onClick={handleLogout} className={styles.LogoutButton}>
         Logout
       </button>
     </div>

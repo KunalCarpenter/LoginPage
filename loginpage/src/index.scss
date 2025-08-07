@@ -1,26 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@use "./styles/index.scss";
 
 body {
+  margin: 0;
   font-family: "Segoe UI", sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-  line-height: 1.5;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-input, textarea {
-  font-family: inherit;
+  background-color: var(--primary);
 }
