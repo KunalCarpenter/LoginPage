@@ -14,3 +14,4 @@ export const registerSchema = Yup.object({
     .oneOf([Yup.ref("password")], "Passwords do not match")
     .required("Required"),
 });
+

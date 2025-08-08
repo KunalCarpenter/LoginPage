@@ -1,0 +1,54 @@
+.wrapper {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+  background-color: #1976d2;
+  color: white;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+}
+
+.navLinks a.active {
+  font-weight: bold;
+  border-bottom: 2px solid white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+button {
+  background-color: #1976d2;
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #145a96;
+}

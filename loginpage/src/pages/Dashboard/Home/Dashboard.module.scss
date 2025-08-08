@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+  background-color: #1976d2;
+  color: white;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+}
+
+.navLinks a.active {
+  font-weight: bold;
+  border-bottom: 2px solid white;
+}
+
+.content {
+  flex: 1;
+  padding: 1rem;
+  background-color: #f7f7f7;
+}
