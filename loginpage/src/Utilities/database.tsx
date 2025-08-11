@@ -32,7 +32,8 @@ export const getUserByEmail = async (email: string) => {
 };
 
 export type Product = {
-  id?: number;
+  SerialNumber: number,
+  id: number;
   name: string;
   description: string;
   category: string;
@@ -48,20 +49,21 @@ export const addProduct = async (product: Product) => {
   // Get all existing products
   const allProducts = await db.getAll(PRODUCT_STORE);
   const usedIds = allProducts
-    .map(p => p.id as number)
+    .map(p => p.SerialNumber as number)
     .sort((a, b) => a - b);
 
-  // Find the smallest available ID starting from 1
-  let newId = 1;
-  for (let id of usedIds) {
-    if (id === newId) {
-      newId++;
+  //Find the smallest available ID starting from 1
+  let newSerialNumber = 1;
+  for (let SerialNumber of usedIds) {
+    if (SerialNumber === newSerialNumber) {
+      newSerialNumber++;
     } else {
       break;
     }
   }
 
-  product.id = newId; // Assign found ID
+  product.SerialNumber = newSerialNumber; // Assign found ID
+  product.id = Date.now();
 
   //
   const tx = db.transaction(PRODUCT_STORE, "readwrite");

@@ -4,10 +4,11 @@ import { getUser } from "../../../utils/storage";
 import ProductTable from "../../../components/product/ProductTable";
 import ProductFormModal from "../../../components/product/ProductFromModal";
 import styles from "./ProductEditor.module.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import UserAvatar from "../../../components/nav/UserAvatar";
 
 const ProductEditor: React.FC = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState<any[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState<any | null>(null);
@@ -55,16 +56,28 @@ const ProductEditor: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <header className={styles.navbar}>
-        <div className={styles.logo}>🛒 E-Commerce</div>
+        <div>
+          <img
+            src="/logo.svg"
+            alt="Logo"
+            height="50"
+            style={{ borderRadius: "20%" }}
+            onClick={() => navigate("/dashboard")}
+          />
+        </div>
         <nav className={styles.navLinks}>
+          <div className={styles.Home}>
           <NavLink to="/dashboard">Home</NavLink>
+          </div>
+          <div className={styles.ProductEditor}> 
           <NavLink to="/dashboard/product-editor">Product Editor</NavLink>
+          </div>
         </nav>
         <UserAvatar />
       </header>
       <div className={styles.header}>
         <h2>Product Editor</h2>
-        <button onClick={handleAddProduct}>+ Add Product</button>
+        <button onClick={handleAddProduct} className={styles.button}>+ Add Product</button>
       </div>
       <ProductTable products={products} onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
       <div >

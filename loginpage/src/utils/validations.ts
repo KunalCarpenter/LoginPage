@@ -15,3 +15,14 @@ export const registerSchema = Yup.object({
     .required("Required"),
 });
 
+export const productFormSchema = Yup.object().shape({
+  name: Yup.string().required("Required"),
+  price: Yup.number()
+    .typeError("Price must be a number")
+    .positive("Price must be positive")
+    .required("Price is required"),
+  description: Yup.string().required("Required"),
+  category: Yup.string().required("Required"),
+  image: Yup.string()
+    .required("Required"),
+});

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { productFormSchema } from "../../utils/validations";
 
 interface ProductFormProps {
   initialData?: any;
@@ -7,51 +8,66 @@ interface ProductFormProps {
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({ initialData, onSave }) => {
-  const [name, setName] = useState(initialData?.name || "");
-  const [price, setPrice] = useState(initialData?.price || "");
-  const [description, setDescription] = useState(initialData?.description || "");
-  const [category, setCategory] = useState(initialData?.category || "");
-  const [image, setImage] = useState(initialData?.image || "");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSave({
-      ...initialData,
-      name,
-      price: Number(price),
-      description,
-      category,
-      image,
-    });
-  };
-
   return (
-    <Form onSubmit={handleSubmit} className="p-2">
-      <Form.Group className="mb-3">
-        <Form.Label>Product Name</Form.Label>
-        <Form.Control value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter product name" required />
-      </Form.Group>
+    <Formik
+      initialValues={{
+        name: initialData?.name || "",
+        price: initialData?.price || "",
+        description: initialData?.description || "",
+        category: initialData?.category || "",
+        image: initialData?.image || "",
+      }}
+      validationSchema={productFormSchema}
+      onSubmit={(values) => {
+        onSave({
+          ...initialData,
+          ...values,
+          price: Number(values.price),
+        });
+      }}
+    >
+      {() => (
+        <Form className="p-2">
+          <div className="mb-3">
+            <label>Product Name</label>
+            <Field name="name" className="form-control" placeHolder="Enter Name"/>
+            <ErrorMessage name="name" component="div" className="text-danger" />
+          </div>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Price</Form.Label>
-        <Form.Control type="number" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Enter price" required />
-      </Form.Group>
+          <div className="mb-3">
+            <label>Price</label>
+            <Field name="price" type="number" className="form-control" placeHolder="Enter price"/>
+            <ErrorMessage name="price" component="div" className="text-danger" />
+          </div>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Description</Form.Label>
-        <Form.Control as="textarea" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter product description" required />
-      </Form.Group>
+          <div className="mb-3">
+            <label>Description</label>
+            <Field
+              as="textarea"
+              rows={3}
+              name="description"
+              className="form-control"
+              placeHolder="Enter product desicription"
+            />
+            <ErrorMessage name="description" component="div" className="text-danger" />
+          </div>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Category</Form.Label>
-        <Form.Control value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Enter category" required />
-      </Form.Group>
+          <div className="mb-3">
+            <label>Category</label>
+            <Field name="category" className="form-control" placeHolder="Enter product category"/>
+            <ErrorMessage name="category" component="div" className="text-danger" />
+          </div>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Image URL</Form.Label>
-        <Form.Control value={image} onChange={(e) => setImage(e.target.value)} placeholder="Enter image link" required />
-      </Form.Group>
-    </Form>
+          <div className="mb-3">
+            <label>Image URL</label>
+            <Field name="image" className="form-control" placeHolder="Enter Image URL"/>
+            <ErrorMessage name="image" component="div" className="text-danger" />
+          </div>
+
+          
+        </Form>
+      )}
+    </Formik>
   );
 };
 

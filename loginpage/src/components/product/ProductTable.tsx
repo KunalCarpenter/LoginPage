@@ -14,7 +14,7 @@ interface ProductTableProps {
 
 const ProductTable: React.FC<ProductTableProps> = ({ products, onEdit, onDelete }) => {
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "SerialNumber", headerName: "Serial", width: 70 },
     { field: "name", headerName: "Product Name", width: 200 },
     { field: "price", headerName: "Price", width: 100 },
     { field: "description", headerName: "Description", width: 200 },
@@ -59,12 +59,15 @@ const ProductTable: React.FC<ProductTableProps> = ({ products, onEdit, onDelete 
   ];
 
   return (
-    <Paper sx={{ height: 500, width: "100%", padding: 2 }}>
+    <Paper sx={{ height: 500, width: "100%", padding: 2,backgroundColor:"#1976d2" }}>
       <DataGrid
         rows={products}
         columns={columns}
+        initialState={{
+          pagination: { paginationModel: { pageSize: 5 } }
+        }}
         pageSizeOptions={[5, 10]}
-        sx={{ border: 0 }}
+        sx={{ border:0 }}
       />
     </Paper>
   );

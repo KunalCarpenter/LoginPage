@@ -13,16 +13,44 @@
   padding: 0.8rem 1.5rem;
   background-color: #1976d2;
   color: white;
-}
-
-.logo {
-  font-size: 1.2rem;
-  font-weight: bold;
+  border-radius: 6px;
 }
 
 .navLinks {
   display: flex;
   gap: 1rem;
+}
+.Home {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.75rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  font-weight: 500;
+  border-radius: 9px;
+  gap: 1rem;
+  justify-content: space-between;
+  display: flex;
+  cursor: pointer;
+  &:hover {
+    background-color: darken(#99c4f5, 10%);
+  }
+}
+.ProductEditor {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.75rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  font-weight: 500;
+  border-radius: 9px;
+  gap: 1rem;
+  justify-content: space-between;
+  display: flex;
+  cursor: pointer;
+  &:hover {
+    background-color: darken(#99c4f5, 10%);
+  }
 }
 
 .navLinks a {
