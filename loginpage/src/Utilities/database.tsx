@@ -32,7 +32,7 @@ export const getUserByEmail = async (email: string) => {
 };
 
 export type Product = {
-  SerialNumber: number,
+  //SerialNumber: number,
   id: number;
   name: string;
   description: string;
@@ -47,22 +47,22 @@ export const addProduct = async (product: Product) => {
   //
 
   // Get all existing products
-  const allProducts = await db.getAll(PRODUCT_STORE);
-  const usedIds = allProducts
-    .map(p => p.SerialNumber as number)
-    .sort((a, b) => a - b);
+  // const allProducts = await db.getAll(PRODUCT_STORE);
+  // const usedIds = allProducts
+  //   .map(p => p.SerialNumber as number)
+  //   .sort((a, b) => a - b);
 
   //Find the smallest available ID starting from 1
-  let newSerialNumber = 1;
-  for (let SerialNumber of usedIds) {
-    if (SerialNumber === newSerialNumber) {
-      newSerialNumber++;
-    } else {
-      break;
-    }
-  }
+  // let newSerialNumber = 1;
+  // for (let SerialNumber of usedIds) {
+  //   if (SerialNumber === newSerialNumber) {
+  //     newSerialNumber++;
+  //   } else {
+  //     break;
+  //   }
+  // }
 
-  product.SerialNumber = newSerialNumber; // Assign found ID
+  //product.SerialNumber = newSerialNumber; // Assign found ID
   product.id = Date.now();
 
   //

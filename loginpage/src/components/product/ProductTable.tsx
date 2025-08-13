@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+
+
 interface ProductTableProps {
   products: any[];
   onEdit: (product: any) => void;
@@ -24,7 +26,9 @@ const ProductTable: React.FC<ProductTableProps> = ({ products, onEdit, onDelete 
       headerName: "Image",
       width: 120,
       renderCell: (params) => (
-        <img src={params.value} alt={params.row.name} style={{ width: 50, height: 50, objectFit: "cover", borderRadius: 4 }} />
+        <img src={params.value} alt="Product Image" onError={(e) => {
+          (e.target as HTMLImageElement).src = "https://www.posindonesia.co.id/_next/image?url=https%3A%2F%2Fadmin-piol.posindonesia.co.id%2Fmedia%2Fimage-not-found-placeholder.png&w=1920&q=75";
+        }} style={{ width: 50, height: 50, objectFit: "cover", borderRadius: 4 }} />
       ),
     },
     { field: "addedBy", headerName: "Added By", width: 150 },
@@ -59,9 +63,11 @@ const ProductTable: React.FC<ProductTableProps> = ({ products, onEdit, onDelete 
   ];
 
   return (
-    <Paper sx={{ height: 500, width: "100%", padding: 2,backgroundColor:"#1976d2" }}>
+    <Paper sx={{ height: "100%", width: "vw", padding:1.5,backgroundColor:"#1976d2", marginLeft:"11px",marginRight:"11px"}}>
       <DataGrid
-        rows={products}
+        rows={products.map((p, index) => ({
+          ...p, SerialNumber: index + 1
+        }))}
         columns={columns}
         initialState={{
           pagination: { paginationModel: { pageSize: 5 } }

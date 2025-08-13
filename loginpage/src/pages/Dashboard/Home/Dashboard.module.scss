@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  //padding: 1rem;
   background: white;
   border-radius: 8px;
 }
@@ -13,7 +13,7 @@
   padding: 0.8rem 1.5rem;
   background-color: #1976d2;
   color: white;
-  border-radius: 6px;
+  //border-radius: 6px;
 }
 
 .navLinks {
@@ -21,7 +21,6 @@
   gap: 1rem;
 }
 .Home {
-  background-color: var(--primary);
   color: white;
   padding: 0.75rem;
   padding-left: 1.2rem;
@@ -33,11 +32,11 @@
   display: flex;
   cursor: pointer;
   &:hover {
-    background-color: darken(#99c4f5, 10%);
+    background-color: darken(#99c4f5, 25%);
+    transition: 0.2s;
   }
 }
 .ProductEditor {
-  background-color: var(--primary);
   color: white;
   padding: 0.75rem;
   padding-left: 1.2rem;
@@ -49,7 +48,8 @@
   display: flex;
   cursor: pointer;
   &:hover {
-    background-color: darken(#99c4f5, 10%);
+    background-color: darken(#99c4f5, 25%);
+    transition: 0.2s;
   }
 }
 

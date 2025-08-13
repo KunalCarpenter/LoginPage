@@ -14,7 +14,7 @@ const Dashboard: React.FC = () => {
             src="/logo.svg"
             alt="Logo"
             height="50"
-            style={{ borderRadius: "20%" }}
+            style={{ borderRadius: "50%" }}
             onClick={() => navigate("/dashboard")}
           />
         </div>
