@@ -33,7 +33,7 @@ export const getUserByEmail = async (email: string) => {
 
 export type Product = {
   //SerialNumber: number,
-  id: number;
+  id: string;
   name: string;
   description: string;
   category: string;
@@ -42,7 +42,10 @@ export type Product = {
   addedBy: string;
 };
 
-export const addProduct = async (product: Product) => {
+
+//let LastGeneratedId =0;
+
+export const addProduct = async (product: Omit<Product, "id">) => {
   const db = await initDB();
   //
 
@@ -63,11 +66,27 @@ export const addProduct = async (product: Product) => {
   // }
 
   //product.SerialNumber = newSerialNumber; // Assign found ID
-  product.id = Date.now();
+  
+  ////product.id = Date.now();
 
   //
+
+
+  let newId = crypto.randomUUID();
+
+  // if(newId <= LastGeneratedId){
+  //   newId= LastGeneratedId + 1;
+  // }
+
+  // LastGeneratedId = newId;
+
+  const newProductWithId : Product = {
+    ...product,
+    id: newId,
+  };
+
   const tx = db.transaction(PRODUCT_STORE, "readwrite");
-  await tx.store.add(product);
+  await tx.store.add(newProductWithId);
   await tx.done;
 };
 
@@ -84,7 +103,7 @@ export const updateProduct = async (updatedProduct: Product) => {
   await tx.done;
 };
 
-export const deleteProduct = async (id: number) => {
+export const deleteProduct = async (id: string) => {
   const db = await initDB();
   const tx = db.transaction(PRODUCT_STORE, "readwrite");
   await tx.store.delete(id);

@@ -11,7 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 interface ProductTableProps {
   products: any[];
   onEdit: (product: any) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }
 
 const ProductTable: React.FC<ProductTableProps> = ({ products, onEdit, onDelete }) => {
