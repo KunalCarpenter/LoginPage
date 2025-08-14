@@ -64,7 +64,34 @@ const ProductEditor: React.FC = () => {
       setIsLoadingModal(false);
     }
   };
+  //
+  
 
+  // In ProductEditor.tsx
+
+// This new function accepts the final list directly from the modal.
+const handleImportProducts = async (productsToImport: any[]) => {
+  // The list is already filtered, so we just map it to the database format.
+  const toSave = productsToImport.map((p) => ({
+    name: p.Name,
+    price: p.Price,
+    description: p.Description,
+    category: p.Category,
+    image: p['Image URL'],
+    addedBy: 'Imported',
+  }));
+
+  // Loop and add each product to the database.
+  for (const product of toSave) {
+    await addProduct(product);
+  }
+
+  setIsPreviewModal(false);
+  loadProducts();
+};
+
+
+  //
   const handleSaveSelected = async () => {
     const toSave = importedProducts
       .filter((p) => selectedRows.map(Number).includes(Number(p.id)))
@@ -200,9 +227,10 @@ const ProductEditor: React.FC = () => {
               show={isPreviewModal}
               onClose={() => setIsPreviewModal(false)}
               products={importedProducts}
-              selectedRows={selectedRows}
-              onSelectionChange={setSelectedRows}
-              onSave={handleSaveSelected}
+              // selectedRows={selectedRows}
+              // onSelectionChange={setSelectedRows}
+              // onSave={handleSaveSelected}
+              onSave={handleImportProducts}
             />
           </>
 

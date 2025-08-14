@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Divider from '@mui/material/Divider';
-import { colors } from '@mui/material';
+//import { colors } from '@mui/material';
 
 // The props have changed: we no longer need selection props.
 // onSave will now pass the final list of products to be saved.

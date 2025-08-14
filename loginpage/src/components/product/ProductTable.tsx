@@ -18,7 +18,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ products, onEdit, onDelete 
   const columns: GridColDef[] = [
     { field: "SerialNumber", headerName: "Serial", width: 70 },
     { field: "name", headerName: "Product Name", width: 200 },
-    { field: "price", headerName: "Price", width: 100 },
+    { field: "price", headerName: "Price in Rs.", width: 100 },
     { field: "description", headerName: "Description", width: 200 },
     { field: "category", headerName: "Category", width: 150 },
     {
