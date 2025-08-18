@@ -40,12 +40,15 @@ export type Product = {
   price: number;
   image: string;
   addedBy: string;
+  //
+  createdAt: number;
+  //
 };
 
 
 //let LastGeneratedId =0;
 
-export const addProduct = async (product: Omit<Product, "id">) => {
+export const addProduct = async (product: Omit<Product, "id" | "createdAt">) => {
   const db = await initDB();
   //
 
@@ -83,6 +86,7 @@ export const addProduct = async (product: Omit<Product, "id">) => {
   const newProductWithId : Product = {
     ...product,
     id: newId,
+    createdAt: Date.now(),
   };
 
   const tx = db.transaction(PRODUCT_STORE, "readwrite");

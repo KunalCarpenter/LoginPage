@@ -4,6 +4,7 @@ import {
   addProduct,
   updateProduct,
   deleteProduct,
+  type Product,
 } from "../../../Utilities/database";
 import { getUser } from "../../../utils/storage";
 import ProductTable from "../../../components/product/ProductTable";
@@ -15,20 +16,42 @@ import { exportToCSV } from "../../../utils/exportToCSV";
 import { exportToXlsx } from "../../../utils/exportToXlsx";
 import { Menu, MenuItem } from "@mui/material";
 import { importXlsx } from "../../../utils/import/importXlsx";
-import ImportLoaderModal from "../../../utils/import/importLoaderModal";
-import ImportPreviewModal from "../../../utils/import/importPreviewModal";
+import ImportLoaderModal from "../../../utils/import/ImportLoaderModal";
+import ImportPreviewModal from "../../../utils/import/ImportPreviewModal";
+import GridPreviewModal from "../../../utils/import/GridPreviewModal";
+
 
 const ProductEditor: React.FC = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState<any[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState<any | null>(null);
-
   //
+  const [importMenuAnchorEl, setImportMenuAnchorEl] = React.useState<null | HTMLElement>(null);
+const [currentImportType, setCurrentImportType] = React.useState<'list' | 'grid' | null>(null);
+const [isListPreviewModalOpen, setIsListPreviewModalOpen] = useState(false);
+const [isGridPreviewModalOpen, setIsGridPreviewModalOpen] = useState(false);
+
+const handleImportMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  setImportMenuAnchorEl(event.currentTarget);
+};
+
+const handleImportMenuClose = () => {
+  setImportMenuAnchorEl(null);
+};
+
+const handleImportMenuItemClick = (importType: 'list' | 'grid') => {
+  setCurrentImportType(importType); // Set the chosen import type
+  handleImportMenuClose();
+  document.getElementById('import-file')?.click(); // Trigger the file input
+};
+
+//  
+//
 
   const validKey = ["Name", "Description", "Category", "Price", "Image URL"];
   const [isLoadingModal, setIsLoadingModal] = useState(false);
-  const [isPreviewModal, setIsPreviewModal] = useState(false);
+  //const [isPreviewModal, setIsPreviewModal] = useState(false);
   const [importedProducts, setImportedProducts] = useState<any[]>([]);
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]);
 
@@ -56,13 +79,33 @@ const ProductEditor: React.FC = () => {
 
       setImportedProducts(validData);
       setTimeout(() => {
-        setIsLoadingModal(false);
-        setIsPreviewModal(true);
-      }, 3000);
+        //setIsLoadingModal(false);
+        //setIsPreviewModal(true);
+        //
+        if (currentImportType === 'list') {
+        setIsListPreviewModalOpen(true);
+                setIsLoadingModal(false);
+
+      } else if (currentImportType === 'grid') {
+        setIsGridPreviewModalOpen(true);
+                setIsLoadingModal(false);
+
+      }
+        //
+      },1000);
     } catch (err) {
       console.error("Import error:", err);
       setIsLoadingModal(false);
     }
+    //
+    finally {
+    // This block will run whether the import succeeds or fails
+    //setIsLoadingModal(false);
+    // THIS IS THE FIX: Reset the file input value
+    if (e.target) {
+      e.target.value = '';
+    }
+  }
   };
   //
   
@@ -72,27 +115,32 @@ const ProductEditor: React.FC = () => {
 // This new function accepts the final list directly from the modal.
 const handleImportProducts = async (productsToImport: any[]) => {
   // The list is already filtered, so we just map it to the database format.
+  const user = getUser();
   const toSave = productsToImport.map((p) => ({
     name: p.Name,
     price: p.Price,
     description: p.Description,
     category: p.Category,
     image: p['Image URL'],
-    addedBy: 'Imported',
+    addedBy: `${user.firstname} ${user.lastname}`,
   }));
 
   // Loop and add each product to the database.
   for (const product of toSave) {
     await addProduct(product);
   }
-
-  setIsPreviewModal(false);
+  //setIsPreviewModal(false);
+  //
+  setIsListPreviewModalOpen(false);
+  //
   loadProducts();
 };
 
 
   //
   const handleSaveSelected = async () => {
+    const user = getUser();
+    
     const toSave = importedProducts
       .filter((p) => selectedRows.map(Number).includes(Number(p.id)))
       .map((p) => ({
@@ -102,14 +150,16 @@ const handleImportProducts = async (productsToImport: any[]) => {
         description: p.Description,
         category: p.Category,
         image: p["Image URL"],
-        addedBy: "Imported",
+        addedBy: `${user.firstname} ${user.lastname}`,
       }));
 
     for (const product of toSave) {
       await addProduct(product);
     }
-
-    setIsPreviewModal(false);
+    //setIsPreviewModal(false);
+    //
+    setIsGridPreviewModalOpen(false); 
+    //
     loadProducts();
   };
 
@@ -121,9 +171,11 @@ const handleImportProducts = async (productsToImport: any[]) => {
 
   const loadProducts = async () => {
     const data = await getAllProducts();
-    const reversed = [...data].reverse();
-    setProducts(reversed);
+    //const reversed = [...data].reverse();
+    //setProducts(reversed);
     //setProducts(data);
+    const sorted = data.sort((a, b) => b.createdAt - a.createdAt);
+    setProducts(sorted);
   };
 
   const handleAddProduct = () => {
@@ -135,13 +187,16 @@ const handleImportProducts = async (productsToImport: any[]) => {
     const user = getUser();
     if (!user) return;
 
-    const newProduct = {
+    const newProduct: Omit<Product, "id" | "createdAt"> = {
       ...product,
+      price: Number(product.price),
       addedBy: `${user.firstname} ${user.lastname}`,
     };
 
     if (product.id) {
-      await updateProduct(newProduct);
+      const existingProduct = products.find(p => p.id === product.id);
+    await updateProduct({ ...existingProduct, ...newProduct });
+      //await updateProduct(newProduct);
     } else {
       await addProduct(newProduct);
     }
@@ -182,7 +237,7 @@ const handleImportProducts = async (productsToImport: any[]) => {
           <img
             src="/logo.svg"
             alt="Logo"
-            height="50"
+            height="40"
             style={{ borderRadius: "50%" }}
             onClick={() => navigate("/dashboard")}
           />
@@ -207,7 +262,7 @@ const handleImportProducts = async (productsToImport: any[]) => {
           </button>
 
           <>
-            <button
+            {/* <button
               className={styles.button}
               onClick={() => document.getElementById("import-file")?.click()}
             >
@@ -231,7 +286,53 @@ const handleImportProducts = async (productsToImport: any[]) => {
               // onSelectionChange={setSelectedRows}
               // onSave={handleSaveSelected}
               onSave={handleImportProducts}
-            />
+            /> */}
+            {/* --- NEW IMPORT MENU --- */}
+<button className={styles.button} onClick={handleImportMenuClick}>
+  Import
+</button>
+<Menu
+  anchorEl={importMenuAnchorEl}
+  open={Boolean(importMenuAnchorEl)}
+  onClose={handleImportMenuClose}
+>
+  <MenuItem onClick={() => handleImportMenuItemClick('list')}>
+    Import with List Preview
+  </MenuItem>
+  <MenuItem onClick={() => handleImportMenuItemClick('grid')}>
+    Import with Grid Preview
+  </MenuItem>
+</Menu>
+
+{/* This remains hidden and is triggered programmatically */}
+<input
+  type="file"
+  accept=".xlsx, .xls"
+  onChange={handleImportFile}
+  id="import-file"
+  //style={{ display: 'none' }}
+/>
+
+{/* RENDER BOTH MODALS */}
+<ImportLoaderModal show={isLoadingModal} />
+
+{/* List View Modal */}
+<ImportPreviewModal
+  show={isListPreviewModalOpen}
+  onClose={() => setIsListPreviewModalOpen(false)}
+  products={importedProducts}
+  onSave={handleImportProducts}
+/>
+
+{/* Grid View Modal */}
+<GridPreviewModal
+  show={isGridPreviewModalOpen}
+  onClose={() => setIsGridPreviewModalOpen(false)}
+  products={importedProducts}
+  selectedRows={selectedRows}
+  onSelectionChange={setSelectedRows}
+  onSave={handleSaveSelected}
+/>
           </>
 
           <button

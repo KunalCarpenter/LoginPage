@@ -19,7 +19,7 @@ const UserAvatar: React.FC = () => {
   return (
     <div>
       <Avatar
-        sx={{ bgcolor: "#secondary.main" , cursor: "pointer" }}
+        sx={{ bgcolor: "white" ,color:"#4a90e2" , cursor: "pointer" }}
         onClick={(e) => setAnchorEl(e.currentTarget)}
       >
         {initials}

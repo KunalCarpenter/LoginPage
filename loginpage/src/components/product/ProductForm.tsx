@@ -6,7 +6,20 @@ interface ProductFormProps {
   initialData?: any;
   onSave: (product: any) => void;
 }
-
+//
+const productCategories = [
+  //'Select Category...',
+  'Electronics',
+  'Books',
+  'Clothing',
+  'Home & Kitchen',
+  'Sports & Outdoors',
+  'Toys & Games',
+  'Health & Personal Care',
+  'Automotive',
+  'Jewelry',
+];
+//
 const ProductForm: React.FC<ProductFormProps> = ({ initialData, onSave }) => {
   return (
     <Formik
@@ -54,7 +67,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, onSave }) => {
 
           <div className="mb-3">
             <label>Category</label>
-            <Field name="category" className="form-control" placeHolder="Enter product category"/>
+            <Field name="category" className="form-control" as="select">
+                <option value="" disabled>Select a category...</option>
+
+              {productCategories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+              </Field>
             <ErrorMessage name="category" component="div" className="text-danger" />
           </div>
 
