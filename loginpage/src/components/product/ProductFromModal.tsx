@@ -11,7 +11,7 @@ interface ProductFormModalProps {
 
 const ProductFormModal: React.FC<ProductFormModalProps> = ({ show, onClose, onSave, initialData }) => {
   return (
-    <Modal show={show} onHide={onClose} centered>
+    <Modal show={show} onHide={onClose} centered scrollable>
       <Modal.Header closeButton>
         <Modal.Title>{initialData ? "Edit Product" : "Add Product"}</Modal.Title>
       </Modal.Header>

@@ -36,7 +36,6 @@ const GridPreviewModal: React.FC<GridPreviewModalProps> = ({
   //
   const [searchText, setSearchText] = useState('');
 
-  // --- NEW: Logic to filter products based on search text ---
   const filteredProducts = useMemo(() => {
     // If the search text is empty, return all products.
     if (!searchText) {
@@ -45,9 +44,7 @@ const GridPreviewModal: React.FC<GridPreviewModalProps> = ({
 
     const lowercasedSearchText = searchText.toLowerCase();
 
-    // Filter the products array.
     return products.filter(product => {
-      // Check if the search text exists in any of the specified fields.
       const nameMatch = product.Name?.toLowerCase().includes(lowercasedSearchText);
       const descriptionMatch = product.Description?.toLowerCase().includes(lowercasedSearchText);
       const priceMatch = product.Price?.toString().includes(lowercasedSearchText);
@@ -74,7 +71,7 @@ const GridPreviewModal: React.FC<GridPreviewModalProps> = ({
           label="Search by Name, Description, Price, or Category"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          sx={{ mb: 2 }} // Adds some margin below the search bar
+          sx={{ mb: 2 }} 
         />
         <Box sx={{ height: 400, width: '100%' }}>
           <DataGrid
@@ -82,7 +79,6 @@ const GridPreviewModal: React.FC<GridPreviewModalProps> = ({
             columns={columns}
             checkboxSelection
             onRowSelectionModelChange={(selectionDetails: any) => {
-    // This correctly handles the object and converts the Set of IDs into a proper array
     const selectedIdsArray = Array.from(selectionDetails.ids || []) as (string | number)[];
     onSelectionChange(selectedIdsArray);
             }}

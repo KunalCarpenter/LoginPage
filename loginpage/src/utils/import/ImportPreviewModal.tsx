@@ -12,7 +12,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Divider from '@mui/material/Divider';
 //import { colors } from '@mui/material';
 
-// The props have changed: we no longer need selection props.
 // onSave will now pass the final list of products to be saved.
 interface ImportPreviewModalProps {
   show: boolean;
@@ -27,24 +26,20 @@ const ImportPreviewModal: React.FC<ImportPreviewModalProps> = ({
   products,
   onSave,
 }) => {
-  // We need internal state to manage the list of products that are visible.
   const [visibleProducts, setVisibleProducts] = useState<any[]>([]);
 
-  // This effect resets the list every time the modal is opened.
   useEffect(() => {
     if (show) {
       setVisibleProducts(products);
     }
   }, [products, show]);
 
-  // Handler to remove a product from the list.
   const handleDelete = (idToDelete: number) => {
     setVisibleProducts((currentProducts) =>
       currentProducts.filter((p) => p.id !== idToDelete)
     );
   };
 
-  // Handler for the main save button.
   const handleSave = () => {
     onSave(visibleProducts);
   };
@@ -63,11 +58,10 @@ Select Products to import.        </Typography>
               <ListItem
                 alignItems="flex-start"
                 secondaryAction={
-                  // The delete button is positioned here.
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    className="delete-button" // Class for CSS targeting.
+                    className="delete-button" 
                     sx={{ opacity: 0, transition: 'opacity 0.2s' }} // Hidden by default.
                     onClick={() => handleDelete(product.id)}
                   >

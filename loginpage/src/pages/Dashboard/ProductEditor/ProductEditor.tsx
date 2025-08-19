@@ -41,7 +41,7 @@ const handleImportMenuClose = () => {
 };
 
 const handleImportMenuItemClick = (importType: 'list' | 'grid') => {
-  setCurrentImportType(importType); // Set the chosen import type
+  setCurrentImportType(importType); 
   handleImportMenuClose();
   document.getElementById('import-file')?.click(); // Trigger the file input
 };
@@ -78,7 +78,7 @@ const handleImportMenuItemClick = (importType: 'list' | 'grid') => {
         }));
 
       setImportedProducts(validData);
-      setTimeout(() => {
+      //setTimeout(() => {
         //setIsLoadingModal(false);
         //setIsPreviewModal(true);
         //
@@ -92,7 +92,7 @@ const handleImportMenuItemClick = (importType: 'list' | 'grid') => {
 
       }
         //
-      },1000);
+      //},1000);
     } catch (err) {
       console.error("Import error:", err);
       setIsLoadingModal(false);
@@ -100,7 +100,7 @@ const handleImportMenuItemClick = (importType: 'list' | 'grid') => {
     //
     finally {
     // This block will run whether the import succeeds or fails
-    //setIsLoadingModal(false);
+    setIsLoadingModal(false);
     // THIS IS THE FIX: Reset the file input value
     if (e.target) {
       e.target.value = '';
@@ -110,7 +110,6 @@ const handleImportMenuItemClick = (importType: 'list' | 'grid') => {
   //
   
 
-  // In ProductEditor.tsx
 
 // This new function accepts the final list directly from the modal.
 const handleImportProducts = async (productsToImport: any[]) => {
@@ -249,6 +248,9 @@ const handleImportProducts = async (productsToImport: any[]) => {
           <div className={styles.ProductEditor}>
             <NavLink to="/dashboard/product-editor">Product Editor</NavLink>
           </div>
+          <div className={styles.About}>
+            <NavLink to="/dashboard/about">About</NavLink>
+          </div>
         </nav>
         <UserAvatar />
       </header>
@@ -287,7 +289,6 @@ const handleImportProducts = async (productsToImport: any[]) => {
               // onSave={handleSaveSelected}
               onSave={handleImportProducts}
             /> */}
-            {/* --- NEW IMPORT MENU --- */}
 <button className={styles.button} onClick={handleImportMenuClick}>
   Import
 </button>
@@ -310,13 +311,11 @@ const handleImportProducts = async (productsToImport: any[]) => {
   accept=".xlsx, .xls"
   onChange={handleImportFile}
   id="import-file"
-  //style={{ display: 'none' }}
+  style={{ display: 'none' }}
 />
 
-{/* RENDER BOTH MODALS */}
 <ImportLoaderModal show={isLoadingModal} />
 
-{/* List View Modal */}
 <ImportPreviewModal
   show={isListPreviewModalOpen}
   onClose={() => setIsListPreviewModalOpen(false)}
@@ -324,7 +323,6 @@ const handleImportProducts = async (productsToImport: any[]) => {
   onSave={handleImportProducts}
 />
 
-{/* Grid View Modal */}
 <GridPreviewModal
   show={isGridPreviewModalOpen}
   onClose={() => setIsGridPreviewModalOpen(false)}
