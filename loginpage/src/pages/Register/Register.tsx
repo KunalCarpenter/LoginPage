@@ -30,14 +30,17 @@ const Register: React.FC = () => {
     validationSchema: registerSchema,
     onSubmit: async ({ firstname, lastname, email, password }) => {
       const res = await registerUser(firstname, lastname, email, password, "MANUAL");
-      res.success ? navigate(ROUTES.DASHBOARD) : toast.error(res.message);
+      res.success ? toast.success("User Successfully ragistered") : toast.error(res.message);
     },
   });
 
   const handleGoogleRegister = async (user: any) => {
     const { given_name, family_name, email, id } = user;
     const res = await registerUser(given_name, family_name, email, id, "GOOGLE_SSO");
-    res.success ? navigate(ROUTES.DASHBOARD) : toast.error(res.message);
+    res.success ? 
+    //navigate(ROUTES.DASHBOARD)
+    toast.success("User Successfully ragistered")
+    : toast.error(res.message);
   };
 
   return (

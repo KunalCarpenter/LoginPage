@@ -23,7 +23,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   searchText,
   onSearchChange,
 }) => {
-  // This logic re-runs only when products or searchText changes.
+  // 
   //
   return (
     <Box sx={{ p: 2, borderRight: "1px solid #ddd", height: "100%" }}>

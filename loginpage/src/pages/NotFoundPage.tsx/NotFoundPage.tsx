@@ -5,15 +5,8 @@ import styles from "./NotFoundPage.module.scss";
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        textAlign: 'center',
-      }}
+    <Box className={styles.Box}
+      
     >
       <Typography variant="h1" component="h1" gutterBottom>
         404

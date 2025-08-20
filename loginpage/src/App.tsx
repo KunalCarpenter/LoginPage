@@ -12,6 +12,7 @@ import UnProtectedRoute from "./components/Auth/UnProtectedRoute";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { ROUTES } from "./constants/routes";
+import ProductDetailPage from "./pages/Dashboard/ProductDetailPage/ProductDetailPage.tsx";
 
 const App: React.FC = () => (
   <div>
@@ -24,6 +25,7 @@ const App: React.FC = () => (
         <Route path={ROUTES.PRODUCTEDITOR} element={<ProtectedRoute><ProductEditor /></ProtectedRoute>} />
         <Route path={ROUTES.ABOUT} element={<ProtectedRoute><About /></ProtectedRoute>} />
         <Route path={ROUTES.NOTFOUNDPAGE} element={<NotFoundPage />} />
+        <Route path={ROUTES.PRODUCTDETAILPAGE} element={<ProtectedRoute><ProductDetailPage /></ProtectedRoute>} />
       </Routes>
     </Router>
   </div>

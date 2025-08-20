@@ -66,7 +66,9 @@ const ProductTable: React.FC<ProductTableProps> = ({ products, onEdit, onDelete 
     <Paper sx={{ height: "100%", width: "vw", padding:1.5,backgroundColor:"#1976d2", marginLeft:"11px",marginRight:"11px"}}>
       <DataGrid
         rows={products.map((p, index) => ({
-          ...p, SerialNumber: index + 1
+          ...p,
+          SerialNumber: index + 1,
+          price: `₹${p.price}`
         }))}
         columns={columns}
         initialState={{

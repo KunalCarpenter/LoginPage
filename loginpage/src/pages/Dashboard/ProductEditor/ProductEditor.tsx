@@ -101,7 +101,7 @@ const handleImportMenuItemClick = (importType: 'list' | 'grid') => {
     finally {
     // This block will run whether the import succeeds or fails
     setIsLoadingModal(false);
-    // THIS IS THE FIX: Reset the file input value
+    //Reset the file input value
     if (e.target) {
       e.target.value = '';
     }
@@ -111,9 +111,7 @@ const handleImportMenuItemClick = (importType: 'list' | 'grid') => {
   
 
 
-// This new function accepts the final list directly from the modal.
 const handleImportProducts = async (productsToImport: any[]) => {
-  // The list is already filtered, so we just map it to the database format.
   const user = getUser();
   const toSave = productsToImport.map((p) => ({
     name: p.Name,

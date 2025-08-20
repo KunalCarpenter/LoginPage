@@ -113,3 +113,8 @@ export const deleteProduct = async (id: string) => {
   await tx.store.delete(id);
   await tx.done;
 };
+
+export const getProductById = async (id : string) : Promise <Product | undefined> => {
+ const db = await initDB();
+ return await db.get(PRODUCT_STORE,  id);
+};

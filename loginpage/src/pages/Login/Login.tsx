@@ -19,14 +19,24 @@ const Login: React.FC = () => {
     validationSchema: loginSchema,
     onSubmit: async ({ email, password }) => {
       const res = await loginUser(email, password);
-      res.success ? navigate(ROUTES.DASHBOARD) : toast.error(res.message);
+      if (res.success) {
+      navigate(ROUTES.DASHBOARD);
+      toast.success("Login Success");
+    } else {
+      toast.error(res.message);
+    }
     },
   });
 
   const handleGoogleLogin = async (user: any) => {
     const { email, id } = user;
     const res = await loginUser(email, id);
-    res.success ? navigate(ROUTES.DASHBOARD) : toast.error(res.message);
+    if (res.success) {
+      navigate(ROUTES.DASHBOARD);
+      toast.success("Login Success");
+    } else {
+      toast.error(res.message);
+    }
   };
 
   return (

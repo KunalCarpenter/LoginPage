@@ -18,6 +18,8 @@ const productCategories = [
   'Health & Personal Care',
   'Automotive',
   'Jewelry',
+  'Accessories',
+  'Vehicles',
 ];
 //
 const ProductForm: React.FC<ProductFormProps> = ({ initialData, onSave }) => {

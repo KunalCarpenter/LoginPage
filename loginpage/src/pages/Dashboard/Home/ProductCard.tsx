@@ -2,13 +2,16 @@ import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import type { Product } from '../../../Utilities/database';
 
+import { Link } from 'react-router-dom';
+
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <Card sx={{ maxWidth: 345, height: '100%' }}>
+    <Link to={`/dashboard/${product.id}`} style={{textDecoration:'none'}}>
+    <Card sx={{ maxWidth: 345, height: '100%',borderRadius:2 }}>
       <CardMedia
         component="img"
         height="140"
@@ -40,6 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </Box>
       </CardContent>
     </Card>
+          </Link>
   );
 };
 

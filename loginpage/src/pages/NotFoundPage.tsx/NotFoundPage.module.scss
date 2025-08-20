@@ -16,3 +16,10 @@
     background-color: darken(#99c4f5, 10%);
   }
 }
+.Box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height:100vh;
+      }

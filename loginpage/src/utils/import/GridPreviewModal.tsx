@@ -1,11 +1,10 @@
-import React ,{useState, useMemo} from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
-import type { GridColDef } from '@mui/x-data-grid';
-import { TextField } from '@mui/material';
-
+import React, { useState, useMemo } from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import Box from "@mui/material/Box";
+import { DataGrid } from "@mui/x-data-grid";
+import type { GridColDef } from "@mui/x-data-grid";
+import { TextField } from "@mui/material";
 
 // These are the props needed for the Grid view to function
 interface GridPreviewModalProps {
@@ -26,15 +25,15 @@ const GridPreviewModal: React.FC<GridPreviewModalProps> = ({
   onSave,
 }) => {
   const columns: GridColDef[] = [
-    { field: 'Name', headerName: 'Name', width: 200 },
-    { field: 'Price', headerName: 'Price', width: 100 },
-    { field: 'Description', headerName: 'Description', width: 200 },
-    { field: 'Category', headerName: 'Category', width: 150 },
-    { field: 'Image URL', headerName: 'Image URL', width: 200 },
+    { field: "Name", headerName: "Name", width: 200 },
+    { field: "Price", headerName: "Price", width: 100 },
+    { field: "Description", headerName: "Description", width: 200 },
+    { field: "Category", headerName: "Category", width: 150 },
+    { field: "Image URL", headerName: "Image URL", width: 200 },
   ];
 
   //
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
 
   const filteredProducts = useMemo(() => {
     // If the search text is empty, return all products.
@@ -44,11 +43,15 @@ const GridPreviewModal: React.FC<GridPreviewModalProps> = ({
 
     const lowercasedSearchText = searchText.toLowerCase();
 
-    return products.filter(product => {
-      const nameMatch = product.Name?.toLowerCase().includes(lowercasedSearchText);
-      const descriptionMatch = product.Description?.toLowerCase().includes(lowercasedSearchText);
-      const priceMatch = product.Price?.toString().includes(lowercasedSearchText);
-      const categoryMatch = product.Category?.toLowerCase().includes(lowercasedSearchText);
+    return products.filter((product) => {
+      const nameMatch =
+        product.Name?.toLowerCase().includes(lowercasedSearchText);
+      const descriptionMatch =
+        product.Description?.toLowerCase().includes(lowercasedSearchText);
+      const priceMatch =
+        product.Price?.toString().includes(lowercasedSearchText);
+      const categoryMatch =
+        product.Category?.toLowerCase().includes(lowercasedSearchText);
 
       // If any field matches, include the product in the new list.
       return nameMatch || descriptionMatch || priceMatch || categoryMatch;
@@ -56,10 +59,14 @@ const GridPreviewModal: React.FC<GridPreviewModalProps> = ({
   }, [products, searchText]); // This logic re-runs only when products or searchText changes.
   //
   return (
-    <Modal show={show} onHide={onClose} size="lg" centered 
-    //
-    scrollable
-    //
+    <Modal
+      show={show}
+      onHide={onClose}
+      size="lg"
+      centered
+      //
+      scrollable
+      //
     >
       <Modal.Header closeButton>
         <Modal.Title>Select Products to Import</Modal.Title>
@@ -71,16 +78,18 @@ const GridPreviewModal: React.FC<GridPreviewModalProps> = ({
           label="Search by Name, Description, Price, or Category"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          sx={{ mb: 2 }} 
+          sx={{ mb: 2 }}
         />
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
             rows={filteredProducts}
             columns={columns}
             checkboxSelection
             onRowSelectionModelChange={(selectionDetails: any) => {
-    const selectedIdsArray = Array.from(selectionDetails.ids || []) as (string | number)[];
-    onSelectionChange(selectedIdsArray);
+              const selectedIdsArray = Array.from(
+                selectionDetails.ids || []
+              ) as (string | number)[];
+              onSelectionChange(selectedIdsArray);
             }}
             initialState={{
               pagination: { paginationModel: { pageSize: 5 } },

@@ -19,6 +19,7 @@ import {
 import { getAllProducts, type Product } from "../../../Utilities/database";
 import FilterPanel from "./FilterPanel";
 import ProductCard from "./ProductCard";
+import { Toaster } from "react-hot-toast";
 //import { border } from "@mui/system";
 
 const Dashboard: React.FC = () => {
@@ -109,6 +110,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
+          <Toaster/>
+
       <header className={styles.navbar}>
         <div>
           <img

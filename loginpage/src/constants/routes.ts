@@ -4,5 +4,6 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   PRODUCTEDITOR: "/dashboard/product-editor",
   ABOUT: "/dashboard/about",
-  NOTFOUNDPAGE: "*"
+  NOTFOUNDPAGE: "*",
+  PRODUCTDETAILPAGE: "/dashboard/:productId",
 };
