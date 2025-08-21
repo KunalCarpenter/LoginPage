@@ -4,13 +4,13 @@ import GoogleAuth from "../../components/Auth/GoogleAuth";
 import { useFormik } from "formik";
 import { registerSchema } from "../../utils/validations";
 import { registerUser } from "../../utils/authHelpers";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ROUTES } from "../../constants/routes";
 import backgroundImage from "../../assets/login-background.png";
 
 const Register: React.FC = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const {
     values,
